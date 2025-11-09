@@ -26,6 +26,7 @@ func main() {
 
 	routes.RegisterUserRoutes(r)
 	routes.RegisterRewardRoutes(r)
+	routes.RegisterSymbolRoutes(r)
 
 	r.Run(":8080") // TODO Use dotenv for PORT
 }
