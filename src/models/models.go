@@ -15,7 +15,7 @@ type User struct {
 // Rewards are source of truth for holdings
 type Reward struct {
 	gorm.Model
-	UserID    string
+	UserID    uint
 	SymbolID  uint
 	Quantity  float64
 	Timestamp time.Time
