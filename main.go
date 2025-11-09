@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	"github.com/gin-gonic/gin"
+
 	"stockybackend/src/database"
 	"stockybackend/src/models"
 )
@@ -12,4 +14,14 @@ func main() {
 
 	database.Connect()
 	models.SeedDatabase(database.DB, false)
+
+	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Hello world",
+		})
+	})
+
+	r.Run(":8080") // TODO Use dotenv for PORT
 }
