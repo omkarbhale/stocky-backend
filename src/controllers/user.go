@@ -17,12 +17,20 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid JSON"})
 		return
 	}
+	if body.Name == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Name is missing"})
+		return
+	}
 
-	database.DB.Create(models.User{
-		Name: body.Name,
-	})
+	user := models.User{Name: body.Name}
+	result := database.DB.Create(&user) // pass pointer!
 
-	c.JSON(http.StatusCreated, gin.H{"message": "User created"})
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to create user"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"message": "User created", "user": user})
 }
 
 func GetUsers(c *gin.Context) {
