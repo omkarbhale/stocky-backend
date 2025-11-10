@@ -7,6 +7,7 @@ import (
 
 	"stockybackend/src/database"
 	"stockybackend/src/models"
+	"stockybackend/src/routes"
 )
 
 func main() {
@@ -22,6 +23,8 @@ func main() {
 			"message": "Hello world",
 		})
 	})
+
+	routes.RegisterUserRoutes(r)
 
 	r.Run(":8080") // TODO Use dotenv for PORT
 }
