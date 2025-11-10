@@ -33,6 +33,7 @@ func main() {
 
 	// // Start the price update thread
 	// controllers.TestPriceSimulation()
+	controllers.GeneratePast12HoursPrices(database.DB)
 	go startPriceUpdater(database.DB)
 
 	r.Run(":8080") // TODO Use dotenv for PORT
