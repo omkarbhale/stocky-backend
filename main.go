@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 
+	"stockybackend/src/controllers"
 	"stockybackend/src/database"
 	"stockybackend/src/models"
 	"stockybackend/src/routes"
@@ -28,5 +31,18 @@ func main() {
 	routes.RegisterRewardRoutes(r)
 	routes.RegisterSymbolRoutes(r)
 
+	// // Start the price update thread
+	// controllers.TestPriceSimulation()
+	go startPriceUpdater(database.DB)
+
 	r.Run(":8080") // TODO Use dotenv for PORT
+}
+
+func startPriceUpdater(db *gorm.DB) {
+	for {
+		now := time.Now()
+		nextHour := now.Truncate(time.Hour).Add(time.Hour)
+		time.Sleep(time.Until(nextHour))
+		controllers.UpdateSymbolPrices(db)
+	}
 }
