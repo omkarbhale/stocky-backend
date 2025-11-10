@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 
 	"stockybackend/src/controllers"
@@ -16,6 +18,11 @@ import (
 
 func main() {
 	fmt.Println("Started...")
+
+	// Load environment variables from .env file
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("Error loading .env file")
+	}
 
 	database.Connect()
 	models.SeedDatabase(database.DB, false)
@@ -42,7 +49,12 @@ func main() {
 	controllers.GeneratePast12HoursPrices(database.DB)
 	go startPriceUpdater(database.DB)
 
-	r.Run(":8080") // TODO Use dotenv for PORT
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(":" + port)
 }
 
 func startPriceUpdater(db *gorm.DB) {
