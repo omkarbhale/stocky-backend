@@ -1,5 +1,17 @@
 # Stocky Backend
 
+## Setting up
+
+1. Rename `.env.example` to `.env`
+2. Make sure correct database credentials and preffered backend PORT is set
+3. Run `go run .` in project's root directory
+
+## Important Notes
+
+- Transaction fee is fixed at 4% of stock's latest price
+- 14 symbols are seeded initally
+- Past 48 hour's stock data is populated initially automatically
+
 ## Database schema
 
 ### **User and Rewards**
@@ -76,10 +88,6 @@ When user **Omkar** is rewarded **10 INFY shares**:
 - **Framework:** Gin
 - **ORM:** GORM
 - **Database:** PostgreSQL
-
-## Notes
-
-- Transaction fee is fixed at 4%.
 
 ## API Specification (YAML)
 
