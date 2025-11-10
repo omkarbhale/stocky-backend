@@ -7,9 +7,6 @@ import (
 )
 
 func RegisterUserRoutes(r *gin.Engine) {
-	userRoutes := r.Group("/user")
-	{
-		userRoutes.POST("/", controllers.CreateUser)
-		userRoutes.GET("/", controllers.GetUsers)
-	}
+	r.POST("/user", controllers.CreateUser)
+	r.GET("/user", controllers.GetUsers)
 }

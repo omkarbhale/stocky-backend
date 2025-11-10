@@ -9,6 +9,7 @@ import (
 
 	"stockybackend/src/controllers"
 	"stockybackend/src/database"
+	"stockybackend/src/middlewares"
 	"stockybackend/src/models"
 	"stockybackend/src/routes"
 )
@@ -20,6 +21,9 @@ func main() {
 	models.SeedDatabase(database.DB, false)
 
 	r := gin.Default()
+
+	// Add the logger middleware
+	r.Use(middlewares.LoggerMiddleware())
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
