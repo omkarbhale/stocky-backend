@@ -31,6 +31,7 @@ func main() {
 	routes.RegisterRewardRoutes(r)
 	routes.RegisterSymbolRoutes(r)
 	routes.RegisterPortfolioRoutes(r)
+	routes.RegisterBonusRoutes(r)
 
 	// // Start the price update thread
 	// controllers.TestPriceSimulation()
