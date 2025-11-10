@@ -1,6 +1,87 @@
-## Stocky Backend
+# Stocky Backend
 
-### Specification
+## Database schema
+
+### **User and Rewards**
+
+| Table       | Fields                                                                            | Relationships                      |
+| ----------- | --------------------------------------------------------------------------------- | ---------------------------------- |
+| **users**   | `id`, `name`, `created_at`, `updated_at`                                          | —                                  |
+| **rewards** | `id`, `user_id`, `symbol_id`, `quantity`, `timestamp`, `created_at`, `updated_at` | belongs to **User** and **Symbol** |
+
+- One **user** → many **rewards**
+- Each **reward** references a **symbol**
+
+---
+
+### **Symbols and Price History**
+
+| Table                      | Fields                                                                      | Relationships         |
+| -------------------------- | --------------------------------------------------------------------------- | --------------------- |
+| **symbols**                | `id`, `name`, `created_at`, `updated_at`                                    | —                     |
+| **symbol_price_histories** | `id`, `symbol_id`, `price`, `time_hour`, `date`, `created_at`, `updated_at` | belongs to **Symbol** |
+
+- One **symbol** → many **price history** records
+- Price history stores **hourly prices** per day (0–23 hours)
+
+---
+
+### **Ledger (Company Accounting)**
+
+| Table            | Fields                                                                                              | Relationships                              |
+| ---------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **accounts**     | `id`, `name`, `type`, `description`, `created_at`, `updated_at`                                     | —                                          |
+| **transactions** | `id`, `description`, `created_at`, `updated_at`                                                     | —                                          |
+| **entries**      | `id`, `transaction_id`, `account_id`, `type` (`debit/credit`), `amount`, `created_at`, `updated_at` | belongs to **Transaction** and **Account** |
+
+- One **transaction** → many **entries**
+- Debits and credits are balanced per transaction
+- Each **entry** references a specific **account**
+
+---
+
+### **Entity Relationships**
+
+```
+User ───< Reward >─── Symbol
+│
+└──< SymbolPriceHistory
+
+Account ───< Entry >─── Transaction
+```
+
+---
+
+## Reward Flow
+
+When user **Omkar** is rewarded **10 INFY shares**:
+
+1. The company buys shares worth ₹10,000 at the latest market price.
+2. 4% transaction fee = ₹400.
+3. A double-entry ledger transaction is recorded:
+
+| Account          | Type   | Amount  |
+| ---------------- | ------ | ------- |
+| StockInvestments | Debit  | ₹10,000 |
+| TransactionFees  | Debit  | ₹400    |
+| Cash             | Credit | ₹10,400 |
+
+4. User sees only the **reward** in their portfolio; fees stay internal.
+
+---
+
+## Tech Stack
+
+- **Language:** Go
+- **Framework:** Gin
+- **ORM:** GORM
+- **Database:** PostgreSQL
+
+## Notes
+
+- Transaction fee is fixed at 4%.
+
+## API Specification (YAML)
 
 ```
 openapi: 3.0.0
