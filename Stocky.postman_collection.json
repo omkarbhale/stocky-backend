@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "9bc2858d-58dd-405b-b76c-f2199e8ce7e2",
+		"name": "Stocky",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24284052"
+	},
+	"item": [
+		{
+			"name": "Portfolio",
+			"item": [
+				{
+					"name": "Get valuation till yesterday",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/historical-inr/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"historical-inr",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/historical-inr/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"historical-inr",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 18:13:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "111"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"history\": [\n        {\n            \"date\": \"2025-11-08\",\n            \"totalInr\": 0\n        },\n        {\n            \"date\": \"2025-11-09\",\n            \"totalInr\": 2385.3425378177317\n        }\n    ],\n    \"userId\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Stats today for user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"symbolId\": 3,\r\n    \"quantity\": 24,\r\n    \"time\": \"2025-11-09T14:30:00Z\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/stats/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 1,\r\n    \"symbolId\": 3,\r\n    \"quantity\": 24,\r\n    \"time\": \"2025-11-09T14:30:00Z\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/stats/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"stats",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 18:32:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currentValueINR\": 2753.9012185940487,\n    \"todayRewards\": [\n        {\n            \"symbolId\": 4,\n            \"symbolName\": \"SBIN\",\n            \"quantity\": 4\n        }\n    ],\n    \"userId\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Bonus: Current Holdings per symbol",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"symbolId\": 4,\r\n    \"quantity\": 2,\r\n    \"time\": \"2025-11-11T14:30:00Z\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/portfolio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"portfolio",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 1,\r\n    \"symbolId\": 4,\r\n    \"quantity\": 2,\r\n    \"time\": \"2025-11-11T14:30:00Z\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/portfolio/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"portfolio",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 18:42:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "283"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"portfolio\": [\n        {\n            \"symbolId\": 3,\n            \"symbolName\": \"BSE\",\n            \"quantity\": 24,\n            \"price\": 98.37338496941246,\n            \"valueInr\": 2360.961239265899\n        },\n        {\n            \"symbolId\": 4,\n            \"symbolName\": \"SBIN\",\n            \"quantity\": 4,\n            \"price\": 98.23499483203743,\n            \"valueInr\": 392.9399793281497\n        }\n    ],\n    \"symbolCount\": 2,\n    \"totalValueINR\": 2753.9012185940487,\n    \"userId\": 1\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Rewards",
+			"item": [
+				{
+					"name": "Create reward",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"symbolId\": 1,\r\n    \"quantity\": 2,\r\n    \"time\": \"2025-11-11T14:30:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reward",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reward"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 2,\r\n    \"symbolId\": 3,\r\n    \"quantity\": 24,\r\n    \"time\": \"2025-11-10T14:30:00Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/reward/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reward",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 15:34:39 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "506"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User rewarded\",\n    \"reward\": {\n        \"ID\": 5,\n        \"CreatedAt\": \"2025-11-10T21:04:39.332849+05:30\",\n        \"UpdatedAt\": \"2025-11-10T21:04:39.332849+05:30\",\n        \"DeletedAt\": null,\n        \"UserID\": 2,\n        \"SymbolID\": 3,\n        \"Quantity\": 24,\n        \"Timestamp\": \"2025-11-10T14:30:00Z\"\n    },\n    \"symbol\": {\n        \"ID\": 3,\n        \"CreatedAt\": \"2025-11-09T21:15:56.97502+05:30\",\n        \"UpdatedAt\": \"2025-11-09T21:15:56.97502+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"BSE\"\n    },\n    \"user\": {\n        \"ID\": 2,\n        \"CreatedAt\": \"2025-11-10T02:10:05.094354+05:30\",\n        \"UpdatedAt\": \"2025-11-10T02:10:05.094354+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "All rewards today for user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/today-stocks/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"today-stocks",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/today-stocks/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"today-stocks",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 15:32:07 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "165"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"user_id\": 1,\n        \"symbol_id\": 1,\n        \"quantity\": 24,\n        \"timestamp\": \"2025-11-10T20:00:00+05:30\"\n    },\n    {\n        \"user_id\": 1,\n        \"symbol_id\": 1,\n        \"quantity\": 24,\n        \"timestamp\": \"2025-11-10T20:00:00+05:30\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Symbols",
+			"item": [
+				{
+					"name": "Get all symbols (just names and ID)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/symbol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"symbol"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/symbol/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"symbol",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 15:34:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"RELIANCE\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"HDFCBANK\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"BSE\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"SBIN\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"ICICIBANK\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"TCS\"\n    },\n    {\n        \"id\": 7,\n        \"name\": \"BHARTIIARTL\"\n    },\n    {\n        \"id\": 8,\n        \"name\": \"LTF\"\n    },\n    {\n        \"id\": 9,\n        \"name\": \"BAJFINANCE\"\n    },\n    {\n        \"id\": 10,\n        \"name\": \"INFY\"\n    },\n    {\n        \"id\": 11,\n        \"name\": \"TMPV\"\n    },\n    {\n        \"id\": 12,\n        \"name\": \"TATASTEEL\"\n    },\n    {\n        \"id\": 13,\n        \"name\": \"AXISBANK\"\n    },\n    {\n        \"id\": 14,\n        \"name\": \"BEL\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Doe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 15:35:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User created\",\n    \"user\": {\n        \"ID\": 3,\n        \"CreatedAt\": \"2025-11-10T21:05:23.3946929+05:30\",\n        \"UpdatedAt\": \"2025-11-10T21:05:23.3946929+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"John Doe\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/user/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Nov 2025 15:35:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "404"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 1,\n        \"CreatedAt\": \"2025-11-10T02:09:54.900144+05:30\",\n        \"UpdatedAt\": \"2025-11-10T02:09:54.900144+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"Omkar\"\n    },\n    {\n        \"ID\": 2,\n        \"CreatedAt\": \"2025-11-10T02:10:05.094354+05:30\",\n        \"UpdatedAt\": \"2025-11-10T02:10:05.094354+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"\"\n    },\n    {\n        \"ID\": 3,\n        \"CreatedAt\": \"2025-11-10T21:05:23.394692+05:30\",\n        \"UpdatedAt\": \"2025-11-10T21:05:23.394692+05:30\",\n        \"DeletedAt\": null,\n        \"Name\": \"John Doe\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
