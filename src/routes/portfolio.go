@@ -8,4 +8,5 @@ import (
 
 func RegisterPortfolioRoutes(r *gin.Engine) {
 	r.GET("/historical-inr/:userId", controllers.GetInrValueTillYesterday)
+	r.GET("/stats/:userId", controllers.GetTodaysUserStats)
 }
