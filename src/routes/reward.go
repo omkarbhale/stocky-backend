@@ -11,4 +11,7 @@ func RegisterRewardRoutes(c *gin.Engine) {
 	{
 		rewardRoutes.POST("/", controllers.CreateReward)
 	}
+
+	// Outside group because this route "/today-stocks" was part of the assignment
+	c.GET("/today-stocks/:userId", controllers.GetRewardsForUser)
 }

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"stockybackend/src/database"
 	"stockybackend/src/models"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -67,4 +68,48 @@ func CreateReward(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{"message": "User rewarded", "user": user, "symbol": symbol, "reward": reward})
+}
+
+func GetRewardsForUser(c *gin.Context) {
+	userIdParam := c.Param("userId")
+	userIdUint64, err := strconv.ParseUint(userIdParam, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid user ID"})
+		return
+	}
+
+	var body struct {
+		Date *time.Time `json:"date"`
+	}
+
+	_ = c.ShouldBindJSON(&body)
+
+	var user models.User
+	if err := database.DB.First(&user, userIdUint64).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("User with ID %d not found", userIdUint64)})
+		return
+	}
+
+	var dateToMatch time.Time
+	if body.Date == nil {
+		dateToMatch = time.Now()
+	} else {
+		dateToMatch = *body.Date
+	}
+
+	type RewardResponse struct {
+		UserID    uint       `json:"user_id"`
+		SymbolID  uint       `json:"symbol_id"`
+		Quantity  float64    `json:"quantity"`
+		Timestamp *time.Time `json:"timestamp"`
+	}
+
+	var rewards []RewardResponse
+	err2 := database.DB.Model(&models.Reward{}).Select("user_id", "symbol_id", "quantity", "timestamp").Where("USER_ID=? AND DATE(timestamp) = DATE(?)", userIdUint64, dateToMatch).Find(&rewards).Error
+	if err2 != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Could not get rewards from database"})
+		return
+	}
+
+	c.JSON(http.StatusOK, rewards)
 }
