@@ -66,7 +66,7 @@ func GeneratePast12HoursPrices(db *gorm.DB) {
 
 	for _, symbol := range symbols {
 		currentTime := time.Now()
-		for i := 12; i > 0; i-- {
+		for i := 48; i > 0; i-- {
 			hour := currentTime.Add(-time.Duration(i) * time.Hour)
 
 			var existingEntry models.SymbolPriceHistory

@@ -30,6 +30,7 @@ func main() {
 	routes.RegisterUserRoutes(r)
 	routes.RegisterRewardRoutes(r)
 	routes.RegisterSymbolRoutes(r)
+	routes.RegisterPortfolioRoutes(r)
 
 	// // Start the price update thread
 	// controllers.TestPriceSimulation()
